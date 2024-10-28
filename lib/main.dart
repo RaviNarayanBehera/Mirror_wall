@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mirror/provider/search_controller.dart';
+import 'package:mirror/views/search_screens.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => SearchEngineProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -9,11 +21,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {
-        '/' : (context) => HomePage(),
-      },
+      home: SearchEngineScreen(),
     );
   }
 }
